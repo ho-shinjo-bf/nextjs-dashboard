@@ -1,5 +1,6 @@
 import { unstable_noStore as noStore } from 'next/cache';
 import { sql } from '@vercel/postgres';
+import { notFound } from 'next/navigation';
 import {
   CustomerField,
   CustomersTableType,
@@ -131,6 +132,7 @@ export async function fetchFilteredInvoices(
 
 export async function fetchInvoicesPages(query: string) {
   noStore();
+
   try {
     const count = await sql`SELECT COUNT(*)
     FROM invoices
